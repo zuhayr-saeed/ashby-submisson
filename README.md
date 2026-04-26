@@ -1,4 +1,4 @@
-# Relevant Priors API — Java Submission
+# Relevant Priors API
 
 A small Java HTTP service for the `relevant-priors-v1` challenge. It accepts the challenge JSON at `POST /predict` and returns one Boolean prediction for every prior study in every case.
 
