@@ -73,10 +73,65 @@ docker run --rm -p 8000:8000 relevant-priors-java
 
 The container starts the HTTP server on port `8000`, trains the model from `data/relevant_priors_public.json` (about 30–60 seconds depending on hardware), and is then ready to serve `POST /predict`.
 
+### Deploy on Render
+
+Render can run this service directly from the included `Dockerfile`.
+
+1. Push this project to GitHub.
+2. In Render, click **New +** → **Web Service**.
+3. Connect your GitHub repository.
+4. Use these settings:
+   - **Runtime:** Docker
+   - **Root Directory:** leave blank if `Dockerfile` is at the repository root; set it to `ashby_submission` if your GitHub repo contains this project inside an outer folder.
+   - **Branch:** your deployment branch, usually `main`.
+   - **Health Check Path:** `/health`
+   - **Instance Type:** Free can work, but startup may take 30–60 seconds while the model trains. A paid small instance is safer for the challenge evaluator.
+5. Leave `PORT` unset in Render. Render provides its own `PORT`, and the app reads it automatically.
+6. Optional environment variables:
+   - `HOST=0.0.0.0`
+   - `JAVA_OPTS=-Xms256m -Xmx512m`
+7. Click **Create Web Service**.
+8. Wait for the deploy logs to show the Java process starting and the `/health` check passing.
+
+After Render finishes deploying, open:
+
+```text
+https://<your-render-service>.onrender.com/health
+```
+
+You should see JSON like:
+
+```json
+{"ok":true,"model_loaded":true,"trained_examples":27614}
+```
+
+Do not worry if the plain homepage URL returns `404 Not Found`. This API does not serve a homepage; it only serves the endpoints below.
+
 The endpoint URL you submit to the challenge is:
 
 ```text
-https://<your-host>/predict
+https://<your-render-service>.onrender.com/predict
+```
+
+For this deployed service, use:
+
+```text
+https://ashby-submisson.onrender.com/predict
+```
+
+Opening `/predict` directly in a browser sends a `GET` request, so it will show:
+
+```json
+{"error":"method_not_allowed"}
+```
+
+That is expected. The challenge evaluator will send a `POST` request with JSON. To test the deployed endpoint yourself:
+
+```bash
+curl -s -X POST https://ashby-submisson.onrender.com/predict \
+  -H 'Content-Type: application/json' \
+  -H 'X-Request-Id: render-smoke-1' \
+  --data @tests/example_request.json
 ```
 
 ### Fly.io
