@@ -1,0 +1,28 @@
+{
+  "challenge_id": "relevant-priors-v1",
+  "schema_version": 1,
+  "cases": [
+    {
+      "case_id": "case_a",
+      "current_study": {"study_id": "cur_a", "study_description": "MRI BRAIN WO CONTRAST", "study_date": "2026-04-01"},
+      "prior_studies": [
+        {"study_id": "p1", "study_description": "MRI BRAIN WO CONTRAST",  "study_date": "2024-04-01"},
+        {"study_id": "p2", "study_description": "CT HEAD WO CONTRAST",    "study_date": "2023-04-01"},
+        {"study_id": "p3", "study_description": "XR KNEE LT 3 VWS",       "study_date": "2018-04-01"},
+        {"study_id": "p4", "study_description": "MAM SCREEN BI W TOMO",   "study_date": "2020-04-01"}
+      ]
+    },
+    {
+      "case_id": "case_b",
+      "current_study": {"study_id": "cur_b", "study_description": "CT ABDOMEN PELVIS WITH CONTRAST", "study_date": "2026-03-15"},
+      "prior_studies": [
+        {"study_id": "p5",  "study_description": "CT ABD/PEL WO CON",          "study_date": "2024-12-01"},
+        {"study_id": "p6",  "study_description": "MRI PELVIS W CON",           "study_date": "2025-09-15"},
+        {"study_id": "p7",  "study_description": "US RENAL DOPPLER",           "study_date": "2023-01-01"},
+        {"study_id": "p8",  "study_description": "MRI BRAIN STROKE LIMITED",   "study_date": "2019-01-01"},
+        {"study_id": "p9",  "study_description": "XR Chest 1V Frontal Only",   "study_date": "2025-06-01"},
+        {"study_id": "p10", "study_description": "CT GUIDED FNA",              "study_date": "2025-11-01"}
+      ]
+    }
+  ]
+}

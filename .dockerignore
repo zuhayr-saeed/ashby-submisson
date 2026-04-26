@@ -1,0 +1,10 @@
+out
+*.zip
+.git
+.gitignore
+.idea
+.vscode
+*.iml
+*.log
+README.md
+experiments.md
